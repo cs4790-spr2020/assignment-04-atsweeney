@@ -156,7 +156,7 @@ namespace BlabberApp.DataStore.Plugins
         {
             User user = new User();
 
-            user.Id = new Guid(row["user_id"].ToString());
+            user.Id = new Guid(row["sys_id"].ToString());
             user.ChangeEmail(row["email"].ToString());
             user.RegisterDTTM = (DateTime)row["dttm_registration"];
             user.LastLoginDTTM = (DateTime)row["dttm_last_login"];
