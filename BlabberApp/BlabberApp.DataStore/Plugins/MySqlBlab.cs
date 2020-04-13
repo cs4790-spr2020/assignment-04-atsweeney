@@ -149,7 +149,7 @@ namespace BlabberApp.DataStore.Plugins
 
             try
             {
-                string sql = "DELETE FROM blabs WHERE blabs.sys_id = '" + blab.Id + "'";
+                string sql = "DELETE FROM atsweeney.blabs WHERE blabs.sys_id = '" + blab.Id + "'";
                 
                 MySqlCommand cmd = new MySqlCommand(sql, this.dcBlab);
                 cmd.ExecuteNonQuery();

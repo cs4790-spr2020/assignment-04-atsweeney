@@ -46,34 +46,6 @@ namespace BlabberApp.DataStoreTest
         }
 
         [TestMethod]
-        public void Add_Blab_GetByUserId_Fail01()
-        {
-            //Arrange
-            Blab expected = null;
-
-            //Act
-            var ex = Assert.ThrowsException<ArgumentNullException>(() => this._harness.Add(expected));
-
-            //Assert
-            Assert.AreEqual("Entity is null", ex.ParamName.ToString());
-        }
-
-        [TestMethod]
-        public void Add_Blab_GetByUserId_Fail02()
-        {
-            //Arrange
-            string email = "user2@example.com";
-            Blab expected = new Blab(new User(email));
-            this._harness.Add(expected);
-
-            //Act
-            var ex = Assert.ThrowsException<ArgumentNullException>(() => this._harness.GetByUserId(""));
-
-            //Assert
-            Assert.AreEqual("userId is null", ex.ParamName.ToString());
-        }
-
-        [TestMethod]
         public void Add_Blab_GetById_Success()
         {
             //Arrange
