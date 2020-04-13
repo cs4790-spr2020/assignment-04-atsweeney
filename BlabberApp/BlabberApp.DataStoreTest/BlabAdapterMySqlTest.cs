@@ -28,177 +28,74 @@ namespace BlabberApp.DataStoreTest
         }
 
         [TestMethod]
-        public void Add_Blab_GetByUserId_Success()
+        public void TestAddAndGetByUserIdBlab()
         {
             //Arrange
-            this._harness.Reset();
-            string Email = "foo@example.com";
-            Blab Expected = new Blab();
-            Expected.Message = "This is a test. This is only a test. If this weren't a test, then this wouldn't be here, would it?";
-            Expected.UserID = Email;
-            this._harness.Add(Expected);
+            string email = "unique@example.com";
+            Blab blab = new Blab("Now is the time for blabs...", new User(email));
+            this._harness.Add(blab);
 
             //Act
-            Blab Actual = (Blab)this._harness.GetByUserId(Email);
-
-            //Assert
-            Assert.AreEqual(Expected, Actual);
-        }
-
-        [TestMethod]
-        public void Add_Blab_GetByUserId_Fail01()
-        {
-            //Arrange
-            this._harness.Reset();
-            Blab expected = null;
-
-            //Act
-            var ex = Assert.ThrowsException<ArgumentNullException>(() => this._harness.Add(expected));
-
-            //Assert
-            Assert.AreEqual("Entity is null", ex.ParamName.ToString());
-        }
-
-        [TestMethod]
-        public void Add_Blab_GetByUserId_Fail02()
-        {
-            //Arrange
-            this._harness.Reset();
-            string Email = "foo@example.com";
-            Blab Expected = new Blab();
-            Expected.UserID = Email;
-            this._harness.Add(Expected);
-
-            //Act
-            var ex = Assert.ThrowsException<ArgumentNullException>(() => this._harness.GetByUserId(""));
-
-            //Assert
-            Assert.AreEqual("userId is null", ex.ParamName.ToString());
-        }
-
-        [TestMethod]
-        public void Add_Blab_GetBySysId_Success()
-        {
-            //Arrange
-            this._harness.Reset();
-            string Email = "foo@example.com";
-            Blab Expected = new Blab();
-            Expected.UserID = Email;
-            this._harness.Add(Expected);
-
-            //Act
-            Blab Actual = (Blab)this._harness.GetBySysId(Expected.SysId);
-
-            //Assert
-            Assert.AreEqual(Expected.SysId, Actual.SysId);
-        }
-
-        [TestMethod]
-        public void Add_Blab_GetBySysId_Fail()
-        {
-            //Arrange
-            this._harness.Reset();
-            string Email = "foo@example.com";
-            Blab Expected = new Blab();
-            Expected.UserID = Email;
-            this._harness.Add(Expected);
-
-            //Act
-            var ex = Assert.ThrowsException<ArgumentNullException>(() => this._harness.GetBySysId(""));
-
-            //Assert
-            Assert.AreEqual("sysId is null", ex.ParamName.ToString());
-        }
-
-        [TestMethod]
-        public void Remove_Blab_Success()
-        {
-            //Arrange
-            this._harness.Reset();
-            string Email = "foo@example.com";
-            Blab Test = new Blab();
-            Test.UserID = Email;
-            this._harness.Add(Test);
-
-            //Act
-            this._harness.Remove(Test);
-
-            //Assert
-            Assert.IsNull(this._harness.GetByUserId(Email));
-        }
-
-        [TestMethod]
-        public void Remove_Blab_Fail()
-        {
-            //Arrange
-            this._harness.Reset();
-            Blab expected = null;
-
-            //Act
-            var ex = Assert.ThrowsException<ArgumentNullException>(() => this._harness.Remove(expected));
-
-            //Assert
-            Assert.AreEqual("Entity is null", ex.ParamName.ToString());
-        }
-
-        [TestMethod]
-        public void Update_Blab_Success()
-        {
-            //Arrange
-            this._harness.Reset();
-            string Email = "foo@example.com";
-            string message = "Hello, I'm a Blab!";
-            Blab Test = new Blab();
-            string TestSysId = Test.SysId;
-            Test.UserID = Email;
-            Test.Message = message;
-            this._harness.Add(Test);
-
-            //Act
-            string NewMessage = "I'm a new Blab!";
-            Test.Message = NewMessage;
-            this._harness.Update(Test);
-            Blab Test2 = (Blab)this._harness.GetBySysId(TestSysId);
-
-            //Assert
-            Assert.AreEqual(NewMessage, Test2.Message);
-        }
-
-        [TestMethod]
-        public void Update_Blab_Fail()
-        {
-            //Arrange
-            this._harness.Reset();
-            Blab expected = null;
-
-            //Act
-            var ex = Assert.ThrowsException<ArgumentNullException>(() => this._harness.Update(expected));
-
-            //Assert
-            Assert.AreEqual("Entity is null", ex.ParamName.ToString());
-        }
-
-        [TestMethod]
-        public void GetAll_Blab_Success()
-        {
-            //Arrange
-            this._harness.Reset();
-            string Email1 = "foo@example.com";
-            string Email2 = "bar@example.com";
-            Blab Expected1 = new Blab();
-            Blab Expected2 = new Blab();
-            Expected1.UserID = Email1;
-            Expected2.UserID = Email2;
-            this._harness.Add(Expected1);
-            this._harness.Add(Expected2);
+            ArrayList actual = (ArrayList)_harness.GetByUserId(email);
             
+            //Assert
+            Assert.AreEqual(1, actual.Count);
+        }
+
+         [TestMethod]
+        public void TestGetById()
+        {
+            //Arrange
+            string email = "user1@example.com";
+            Blab expected = new Blab("Now is the time for blabs...", new User(email));
+            this._harness.Add(expected);
+
             //Act
-            var AllTheBlabs = this._harness.GetAll();
+            Blab actual = this._harness.GetById(expected.Id);
+            
+            //Assert
+            Assert.AreEqual(expected.Id, actual.Id);
+        }
+
+        [TestMethod]
+        public void TestGetAllBlabs()
+        {
+            //Arrange & Act
+            ArrayList allBlabs = this._harness.GetAll() as ArrayList;
 
             //Assert
-            Assert.IsTrue(AllTheBlabs is IEnumerable);
-            Assert.AreEqual("foo@example.com", AllTheBlabs.First().UserID);
-            Assert.AreEqual("bar@example.com", AllTheBlabs.Last().UserID);
+            Assert.IsTrue(allBlabs.Count > 0);
+        }
+
+        [TestMethod]
+        public void TestRemoveBlab()
+        {
+            //Arrange
+            string email = "anotheruser@example.com";
+            Blab blab = new Blab("Now is the time for blabs...", new User(email));
+            this._harness.Add(blab);
+
+            //Act
+            this._harness.Remove(blab);
+            
+            //Assert
+            Assert.IsNull(this._harness.GetById(blab.Id));
+        }
+
+        [TestMethod]
+        public void TestUpdateBlab()
+        {
+            //Arrange
+            string email = "mindChanger@example.com";
+            Blab blab = new Blab("Now is the time for blabs...", new User(email));
+            this._harness.Add(blab);
+
+            //Act
+            blab.Message = "I've been updated!";
+            this._harness.Update(blab);
+            
+            //Assert
+            Assert.AreEqual("I've been updated!", this._harness.GetById(blab.Id));
         }
     }
 }

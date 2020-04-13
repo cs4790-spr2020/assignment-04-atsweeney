@@ -39,6 +39,7 @@ namespace BlabberApp.DataStore.Plugins
                     return obj;
                 }
             }
+            
             return null;
         }
 
@@ -55,7 +56,14 @@ namespace BlabberApp.DataStore.Plugins
 
         public IEnumerable ReadByUserId(string Id)
         {
-            return null;
+            ArrayList list = new ArrayList();
+
+            foreach(Blab blab in this.buffer)
+            {
+                list.Add(blab);
+            }
+            
+            return list;
         }
 
         public iEntity ReadByUserEmail(string email)
@@ -67,6 +75,7 @@ namespace BlabberApp.DataStore.Plugins
                     return user;
                 }
             }
+            
             return null;
         }
     }

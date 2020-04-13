@@ -13,4 +13,10 @@
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlabberApp.Services\BlabberApp.Services.csproj" />
+    <ProjectReference Include="..\BlabberApp.Domain\BlabberApp.Domain.csproj" />
+    <ProjectReference Include="..\BlabberApp.DataStore\BlabberApp.DataStore.csproj" />
+  </ItemGroup>
+
 </Project>

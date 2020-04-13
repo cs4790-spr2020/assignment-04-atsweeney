@@ -62,48 +62,47 @@ namespace BlabberApp.DomainTest.Entities
         }
 
         [TestMethod]
-        public void TestGetSysId()
+        public void TestId()
         {
             //Arrange
             User harness = new User();
-            string expected = harness.SysId;
+            Guid expected = harness.Id;
 
             //Act
-            string actual = harness.SysId;
+            Guid actual = harness.Id;
 
             //Assert
             Assert.AreEqual(actual, expected);
-            Assert.AreEqual(true, harness.SysId is string);
         }
 
         [TestMethod]
         public void TestGetSetRegisterDTTM()
         {
             //Arrange
-            User Expected = new User();
-            Expected.RegisterDTTM = DateTime.Now;
+            User expected = new User();
+            expected.RegisterDTTM = DateTime.Now;
 
             //Act
-            User Actual = new User();
-            Actual.RegisterDTTM = DateTime.Now;
+            User actual = new User();
+            actual.RegisterDTTM = DateTime.Now;
 
             //Assert
-            Assert.AreEqual(Expected.RegisterDTTM.ToString(), Actual.RegisterDTTM.ToString());
+            Assert.AreEqual(expected.RegisterDTTM.ToString(), actual.RegisterDTTM.ToString());
         }
 
         [TestMethod]
         public void TestGetSetLastLoginDTTM()
         {
             //Arrange
-            User Expected = new User();
-            Expected.LastLoginDTTM = DateTime.Now;
+            User expected = new User();
+            expected.LastLoginDTTM = DateTime.Now;
 
             //Act
-            User Actual = new User();
-            Actual.LastLoginDTTM = DateTime.Now;
+            User actual = new User();
+            actual.LastLoginDTTM = DateTime.Now;
 
             //Assert
-            Assert.AreEqual(Expected.LastLoginDTTM.ToString(), Actual.LastLoginDTTM.ToString());
+            Assert.AreEqual(expected.LastLoginDTTM.ToString(), actual.LastLoginDTTM.ToString());
         }
     }
 }
