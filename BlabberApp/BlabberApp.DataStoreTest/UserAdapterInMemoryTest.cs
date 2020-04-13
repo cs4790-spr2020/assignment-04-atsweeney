@@ -97,7 +97,6 @@ namespace BlabberApp.DataStoreTest
 
             //Assert
             Assert.IsTrue(AllTheUsers is IEnumerable);
-            Assert.IsTrue(users.Count > 0);
         }
     }
 }

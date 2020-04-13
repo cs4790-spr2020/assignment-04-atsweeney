@@ -76,16 +76,6 @@ namespace BlabberApp.DataStoreTest
         }
 
         [TestMethod]
-        public void Remove_Blab_Fail()
-        {
-            //Arrange and Act
-            Blab expected = null;
-
-            //Assert
-            Assert.ThrowsException<ArgumentNullException>(() => this._harness.Remove(expected));
-        }
-
-        [TestMethod]
         public void Update_Blab_Success()
         {
             //Arrange
@@ -111,7 +101,6 @@ namespace BlabberApp.DataStoreTest
 
             //Assert
             Assert.IsTrue(AllTheBlabs is IEnumerable);
-            Assert.IsTrue(blabs.Count > 0);
         }
     }
 }
