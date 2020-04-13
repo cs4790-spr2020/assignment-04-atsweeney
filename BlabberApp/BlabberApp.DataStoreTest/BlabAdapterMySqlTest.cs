@@ -1,31 +1,32 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.EntityFrameworkCore;
-using BlabberApp.DataStore;
-using BlabberApp.Domain.Entities;
-using System;
 using System.Collections;
-using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BlabberApp.DataStore.Adapters;
+using BlabberApp.DataStore.Plugins;
+using BlabberApp.Domain.Entities;
 
 namespace BlabberApp.DataStoreTest
 {
     [TestClass]
-    public class InMemory_Blab_UnitTests
+    public class BlabAdapter_MySql_UnitTests
     {
         //Attributes
-         private InMemory<Blab> _harness;
+         private BlabAdapter _harness;
 
 
         //Constructor
-         public InMemory_Blab_UnitTests()
+         public BlabAdapter_MySql_UnitTests()
         {
-            var options = new DbContextOptionsBuilder<ApplicationContext>()
-                .UseInMemoryDatabase(databaseName: "Add_writes")
-                .Options;
-            this._harness = new InMemory<Blab>(new ApplicationContext(options));
+            this._harness = new BlabAdapter(new MySqlBlab());
         }
 
 
         //Methods
+        [TestMethod]
+        public void Canary()
+        {
+            Assert.AreEqual(true, true);
+        }
+
         [TestMethod]
         public void Add_Blab_GetByUserId_Success()
         {

@@ -1,9 +1,9 @@
+using System;
 using System.Collections.Generic;
-using BlabberApp.Domain.Entities;
 
 namespace BlabberApp.Domain.Interfaces
 {
-    public interface iRepository<T> where T : BaseEntity
+    public interface iRepository<T> where T : iEntity
     {
         void Add(T entity);
 
@@ -13,8 +13,6 @@ namespace BlabberApp.Domain.Interfaces
 
         IEnumerable<T> GetAll();
 
-        T GetBySysId(string sysId);
-
-        T GetByUserId(string userId);
+        T GetById(Guid sysId);
     }
 }

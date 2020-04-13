@@ -1,0 +1,37 @@
+﻿@page
+@model BlabberApp.Client.Pages.FeedModel
+@using BlabberApp.Domain.Entities
+@using BlabberApp.Services.Interfaces
+@inject iBlabService BlabService
+@inject iUserService UserService
+@{
+    ViewData["Title"] = "Feed";
+}
+
+<style>
+    div.border {
+        border-style: 2px solid;
+    }
+</style>
+
+<section id="main">
+    <form method="POST">
+        <label>Email</label>
+        <input type="email" name="emailaddress">
+        <br />
+        <label>Message</label>
+        <input type="text" name="message">
+        <br />
+        <input type="submit">
+    </form>
+
+    <hr />
+
+    <h1>Feed</h1>
+    <div class="border" id="feed">
+        @foreach (@Blab blab in @BlabService.GetAll())
+        {
+            <li><b>@blab.User.Email.ToString()</b>: @blab.Message.ToString()</li>
+        }
+    </div>
+</section>

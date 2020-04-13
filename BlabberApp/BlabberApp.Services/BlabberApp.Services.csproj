@@ -2,11 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlabberApp.Domain\BlabberApp.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.19" />
+    <ProjectReference Include="..\BlabberApp.DataStore\BlabberApp.DataStore.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
